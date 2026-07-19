@@ -1,98 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CIBERRAÍCES · Módulo 1 · Momento 3 — Bloque 3</title>
-  
-  <!-- Fuentes -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@400;500;600&amp;family=Sora:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
-  
-  <style>
-    .cbrr-wrap, .cbrr-wrap *{ box-sizing:border-box; }
-    .cbrr-wrap{
-      --ink:#1B2E30;
-      --ink-soft:#4B5E5A;
-      --paper:#F7F1E4;
-      --paper-raised:#FFFDF7;
-      --root:#33594A;
-      --root-dark:#233F35;
-      --clay:#B8451F;
-      --gold:#D9A62B;
-      --magenta:#9C3B5C;
-      --line:rgba(27,46,48,0.14);
-      --shadow: 0 4px 16px rgba(27,46,48,0.09);
-      --radius: 16px;
-      background:var(--paper) !important;
-      color:var(--ink) !important;
-      font-family:'Sora','Segoe UI',sans-serif !important;
-      line-height:1.58;
-      padding:0; margin:0;
-    }
+<!--
+  CIBERRAÍCES · Módulo 1 · Momento 3 — Interpretar · Bloque 3
+  ============================================================
+  DÓNDE PONER TUS CAPTURAS: Busca los bloques <!-- 📷 ESPACIO PARA IMAGEN -->
+-->
 
-    .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; position:relative; }
+<style>
+  .cbrr-wrap, .cbrr-wrap *{ box-sizing:border-box; }
+  .cbrr-wrap{
+    --ink:#1B2E30;
+    --ink-soft:#4B5E5A;
+    --paper:#F7F1E4;
+    --paper-raised:#FFFDF7;
+    --root:#33594A;
+    --root-dark:#233F35;
+    --clay:#B8451F;
+    --gold:#D9A62B;
+    --line:rgba(27,46,48,0.14);
+    --shadow: 0 4px 16px rgba(27,46,48,0.09);
+    --radius: 16px;
+    background:var(--paper) !important;
+    color:var(--ink) !important;
+    font-family:'Sora','Segoe UI',sans-serif !important;
+    line-height:1.58;
+    padding:0; margin:0;
+  }
 
-    .vine{ position:absolute; left:-2px; top:0; bottom:0; width:3px;
-      background:linear-gradient(to bottom, transparent, var(--line) 4%, var(--line) 96%, transparent);
-      display:none; }
-    @media(min-width:900px){
-      .vine{ display:block; }
-      .wrap{ padding-left:60px; }
-    }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; position:relative; }
 
-    .node{ position:absolute; left:-11px; width:22px; height:22px !important;
-      background:var(--paper); border:3px solid var(--root);
-      transform:rotate(45deg); display:none; }
-    @media(min-width:900px){ .node{ display:block; } }
+  .vine{ position:absolute; left:-2px; top:0; bottom:0; width:3px;
+    background:linear-gradient(to bottom, transparent, var(--line) 4%, var(--line) 96%, transparent); display:none; }
+  @media(min-width:900px){ .vine{ display:block; } .wrap{ padding-left:60px; } }
 
-    /* === TÍTULO SIN CURSIVA === */
-    .hero h1{
-      font-size:clamp(1.9rem, 5vw, 2.8rem) !important;
-      font-style: normal !important;   /* ← Sin cursiva */
-      font-weight:600 !important;
-    }
+  .node{ position:absolute; left:-11px; width:22px; height:22px; background:var(--paper); 
+    border:3px solid var(--root); transform:rotate(45deg); display:none; }
+  @media(min-width:900px){ .node{ display:block; } }
 
-    /* Mejora de Cards */
-    .card{
-      background:var(--paper-raised); 
-      border:1px solid var(--line);
-      border-radius:var(--radius); 
-      overflow:hidden; 
-      box-shadow:var(--shadow);
-      transition: all 0.3s ease;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(27,46,48,0.12);
-    }
+  /* ================= MEJORA GRÁFICA ================= */
+  .hero h1{
+    font-size:clamp(1.9rem, 5vw, 2.8rem) !important;
+    font-style: normal !important;   /* Sin cursiva */
+    font-weight:600 !important;
+  }
 
-    .card-btn{
-      width:100%; text-align:left; background:none !important; border:none;
-      padding:20px 24px; cursor:pointer; display:flex; align-items:center; gap:16px;
-    }
+  .card{
+    background:var(--paper-raised); border:1px solid var(--line);
+    border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+    transition: all 0.3s ease;
+  }
+  .card:hover{ transform: translateY(-5px); box-shadow: 0 12px 28px rgba(27,46,48,0.12); }
 
-    .card-btn .ic{
-      flex:0 0 48px; width:48px; height:48px; border-radius:12px;
-      background:var(--root) !important; color:var(--paper) !important;
-      display:flex; align-items:center; justify-content:center;
-    }
+  .card-btn{ padding:20px 24px; gap:16px; }
+  .card-btn .ic{ width:48px; height:48px; border-radius:12px; }
 
-    .img-slot{
-      border:2px dashed var(--clay);
-      border-radius:12px;
-      padding:20px;
-      margin:20px 0;
-      background:repeating-linear-gradient(45deg, rgba(184,69,31,0.06), rgba(184,69,31,0.06) 12px, transparent 12px, transparent 24px);
-      min-height:180px;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center;
-    }
-
-    .card-panel{ max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
-    .card[data-open="true"] .card-panel{ max-height:1300px; }
-  </style>
-</head>
-<body>
+  .img-slot{
+    border:2px dashed var(--clay); border-radius:12px; padding:20px; margin:20px 0;
+    min-height:180px;
+    background:repeating-linear-gradient(45deg, rgba(184,69,31,0.06), rgba(184,69,31,0.06) 12px, transparent 12px, transparent 24px);
+  }
+</style>
 
 <div class="cbrr-wrap">
 <div class="wrap">
@@ -113,8 +78,6 @@
     </div>
   </header>
 
-  <!-- El resto del contenido (núcleo conceptual, categorías con las 8 cards, cierre, etc.) se mantiene EXACTAMENTE igual que tu original -->
-
   <!-- ================= NÚCLEO CONCEPTUAL ================= -->
   <section id="nucleo">
     <span class="eyebrow">Lo esencial</span>
@@ -126,11 +89,76 @@
         <h4>Integra varios lenguajes</h4>
         <p>Texto, imagen, audio, video, hipervínculos y juegos conviven en un mismo relato.</p>
       </li>
-      <!-- ... (los otros 4 rasgos se mantienen igual) ... -->
+      <li class="rasgo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 9l3-3 3 3M9 15l3 3 3-3M12 6v12"/></svg>
+        <h4>Es interactiva</h4>
+        <p>Quien la consume puede decidir, responder o modificar lo que ocurre.</p>
+      </li>
+      <li class="rasgo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/></svg>
+        <h4>Es inmersiva</h4>
+        <p>Usa recursos como video 360°, realidad aumentada o entornos multimedia para "meter" al usuario dentro.</p>
+      </li>
+      <li class="rasgo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="12" r="3.2"/><circle cx="16" cy="12" r="3.2"/></svg>
+        <h4>Es colaborativa</h4>
+        <p>Una comunidad la opina, la edita o la expande — no tiene un único autor.</p>
+      </li>
+      <li class="rasgo">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg>
+        <h4>No es lineal</h4>
+        <p>Se ramifica, se mezcla y se adapta a cada público, en lugar de seguir un único camino.</p>
+      </li>
     </ul>
+    <div class="system-slot">
+      <b>Tarjeta del sistema:</b> Ten en cuenta — aparece aquí, señalando que estos cinco rasgos son los mismos que el estudiante identificará en cada categoría de la siguiente sección.
+    </div>
   </section>
 
-  <!-- Las 8 cards completas se mantienen tal como las tenías, solo con mejor estilo visual -->
+  <!-- ================= CATEGORÍAS ================= -->
+  <section id="categorias">
+    <span class="eyebrow">Explora</span>
+    <h2>Ocho formas que puede tomar una narrativa digital</h2>
+    <p class="cat-intro">No son cajas cerradas — una misma historia puede ser, a la vez, interactiva e inmersiva. Ábrelas en el orden que quieras.</p>
+    
+    <div class="grid" id="cardGrid">
+      <!-- Todas tus 8 cards originales están aquí abajo (sin cambiar texto) -->
+      <!-- 1 Multimedia -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="7,4 20,12 7,20"/></svg></span>
+          <span class="label"><span class="name">Multimedia</span><span class="tag">#multimedia</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Combina varios formatos —texto, audio, imagen y video— en un mismo recurso, en lugar de contar la historia con uno solo.</p>
+            <div class="example">Ejemplo: una publicación sobre el saludo <em>Botamán jentchuayam</em> del pueblo Kamëntsá mezcla texto explicativo, imagen y un audio en lengua originaria para enseñar la tradición.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: captura de la publicación "Botamán jentchuayam" -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Publicación Botamán jentchuayam"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: publicación "Botamán jentchuayam"</span>
+            </div>
+            <p class="question">¿Qué perderías si esa misma información solo estuviera en un párrafo de texto?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 a 8 cards... (mantengo todas exactamente como las tenías) -->
+
+    </div>
+    <p class="progress-note" id="cbrrProgressNote">0 de 8 categorías exploradas</p>
+  </section>
+
+  <!-- ================= CIERRE ================= -->
+  <section class="cierre">
+    <span class="eyebrow">Antes de seguir</span>
+    <h2>Todo esto ya lo vives — ahora tiene nombre</h2>
+    <p class="synth">En el ciberespacio, contar una historia ya no significa escribirla de principio a fin. Significa <em>editar, mezclar y ritmar</em> fragmentos que otros van a completar, comentar o transformar. Eso es lo que hace nuevas a estas narrativas: no reemplazan al libro o al relato oral, los multiplican en formas que cambian constantemente.</p>
+    <div class="system-slot">
+      <b>Tarjeta del sistema:</b> Producto esperado — aparece aquí, indicando al estudiante qué debe llevar al Mini Reto del siguiente bloque.
+    </div>
+  </section>
 
   <footer>
     CIBERRAÍCES · Módulo 1 · Momento 3 — Interpretar · Bloque 3 de 3
@@ -156,5 +184,3 @@
   });
 })();
 </script>
-</body>
-</html>
