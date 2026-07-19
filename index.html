@@ -1,7 +1,30 @@
 <!--
   CIBERRAÍCES · Módulo 1 · Momento 3 — Interpretar · Bloque 3
   ============================================================
-  DÓNDE PONER TUS CAPTURAS: Busca los bloques <!-- 📷 ESPACIO PARA IMAGEN -->
+  CÓMO SUBIR ESTO A MOODLE (elige una opción):
+
+  OPCIÓN A — Recurso "Archivo" (recomendada, se ve exactamente así):
+    1. En el curso: Agregar actividad o recurso → Archivo.
+    2. Sube este .html tal cual.
+    3. En Ajustes → Apariencia → Mostrar: elige "En una ventana nueva" o "Incrustado".
+
+  OPCIÓN B — Recurso "Página" (pegar el código):
+    1. Agregar actividad o recurso → Página.
+    2. En el editor Atto, pulsa el botón </> "Editar código fuente HTML".
+    3. Borra lo que haya y pega TODO este archivo completo (desde este
+       comentario hasta el final).
+    4. Guarda. NO uses "copiar y pegar visualmente" (Ctrl+V directo en el
+       editor) porque el editor interpreta el código en vez de insertarlo tal cual;
+       siempre debes usar el botón de código fuente </>.
+
+  DÓNDE PONER TUS CAPTURAS:
+    Busca en este archivo los bloques marcados así:
+        <!-- 📷 ESPACIO PARA IMAGEN: [descripción] -->
+        <div class="img-slot"> ... </div>
+    Dentro de cada <div class="img-slot"> hay un comentario que indica
+    exactamente dónde pegar tu etiqueta <img src="..." alt="...">.
+    Hay uno por cada una de las 8 categorías, más dos para los recursos
+    interactivos reales (mapa y recorrido virtual).
 -->
 
 <style>
@@ -15,48 +38,199 @@
     --root-dark:#233F35;
     --clay:#B8451F;
     --gold:#D9A62B;
+    --magenta:#9C3B5C;
     --line:rgba(27,46,48,0.14);
-    --shadow: 0 4px 16px rgba(27,46,48,0.09);
-    --radius: 16px;
+    --shadow: 0 1px 0 rgba(27,46,48,0.06);
+    --radius: 14px;
+
     background:var(--paper) !important;
     color:var(--ink) !important;
     font-family:'Sora','Segoe UI',sans-serif !important;
-    line-height:1.58;
-    padding:0; margin:0;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    padding:0;
+    margin:0;
+    display:block;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cbrr-wrap *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
   }
 
-  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; position:relative; }
+  .cbrr-wrap a{ color:var(--root-dark) !important; }
 
-  .vine{ position:absolute; left:-2px; top:0; bottom:0; width:3px;
-    background:linear-gradient(to bottom, transparent, var(--line) 4%, var(--line) 96%, transparent); display:none; }
-  @media(min-width:900px){ .vine{ display:block; } .wrap{ padding-left:60px; } }
+  .cbrr-wrap .eyebrow{
+    font-family:'Space Mono',monospace !important;
+    font-size:0.72rem !important;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--root-dark) !important;
+    display:inline-block;
+    margin-bottom:0.6rem;
+  }
 
-  .node{ position:absolute; left:-11px; width:22px; height:22px; background:var(--paper); 
-    border:3px solid var(--root); transform:rotate(45deg); display:none; }
-  @media(min-width:900px){ .node{ display:block; } }
-
-  /* ================= MEJORA GRÁFICA ================= */
-  .hero h1{
-    font-size:clamp(1.9rem, 5vw, 2.8rem) !important;
-    font-style: normal !important;   /* Sin cursiva */
+  .cbrr-wrap h1, .cbrr-wrap h2, .cbrr-wrap h3, .cbrr-wrap h4{
+    font-family:'Fraunces',Georgia,serif !important;
     font-weight:600 !important;
+    margin:0 0 0.5rem 0 !important;
+    color:var(--ink) !important;
+    line-height:1.25 !important;
   }
 
-  .card{
+  .cbrr-wrap .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 24px;
+    position:relative;
+  }
+
+  .cbrr-wrap .vine{
+    position:absolute; left:-2px; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom, transparent, var(--line) 4%, var(--line) 96%, transparent);
+    display:none;
+  }
+  @media(min-width:900px){
+    .cbrr-wrap .vine{ display:block; }
+    .cbrr-wrap .wrap{ padding-left:48px; }
+  }
+  .cbrr-wrap .node{
+    position:absolute; left:-9px; width:20px; height:20px !important;
+    background:var(--paper); border:2px solid var(--root);
+    transform:rotate(45deg); display:none;
+  }
+  @media(min-width:900px){ .cbrr-wrap .node{ display:block; } }
+
+  .cbrr-wrap header.hero{ padding:56px 0 32px 0; position:relative; }
+  .cbrr-wrap .hero .kicker{
+    font-family:'Space Mono',monospace !important;
+    font-size:0.78rem !important;
+    letter-spacing:0.1em;
+    color:var(--ink-soft) !important;
+    text-transform:uppercase;
+  }
+  .cbrr-wrap .hero h1{
+    font-size:clamp(1.7rem, 4vw, 2.6rem) !important;
+    font-style:italic;
+    font-weight:500 !important;
+    max-width:20ch;
+    margin-top:0.6rem !important;
+  }
+  .cbrr-wrap .hero .lede{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin-top:1rem;
+  }
+
+  .cbrr-wrap .system-slot{
+    border:1.5px dashed var(--ink-soft);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:24px 0;
+    font-family:'Space Mono',monospace !important;
+    font-size:0.78rem !important;
+    color:var(--ink-soft) !important;
+    background:rgba(255,253,247,0.5);
+  }
+  .cbrr-wrap .system-slot b{
+    color:var(--ink) !important;
+    font-family:'Sora',sans-serif !important;
+    font-size:0.85rem !important;
+  }
+
+  /* espacios para imágenes propias */
+  .cbrr-wrap .img-slot{
+    border:1.5px dashed var(--clay);
+    border-radius:10px;
+    padding:0;
+    margin:12px 0;
+    background:repeating-linear-gradient(45deg, rgba(184,69,31,0.05), rgba(184,69,31,0.05) 10px, transparent 10px, transparent 20px);
+    min-height:120px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    overflow:hidden;
+  }
+  .cbrr-wrap .img-slot img{
+    display:block; width:100% !important; height:auto !important; max-width:100%;
+    border-radius:8px;
+  }
+  .cbrr-wrap .img-slot .img-slot-hint{
+    font-family:'Space Mono',monospace !important;
+    font-size:0.72rem !important;
+    color:var(--clay) !important;
+    padding:18px;
+  }
+
+  .cbrr-wrap section{ padding:36px 0; position:relative; }
+  .cbrr-wrap section + section{ border-top:1px solid var(--line); }
+
+  .cbrr-wrap .rasgos{
+    list-style:none; margin:22px 0 0 0; padding:0;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;
+  }
+  .cbrr-wrap .rasgo{
+    background:var(--paper-raised); border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .cbrr-wrap .rasgo .icon{
+    width:26px !important; height:26px !important; color:var(--root) !important;
+    margin-bottom:10px; display:block;
+  }
+  .cbrr-wrap .rasgo h4{ font-family:'Sora',sans-serif !important; font-weight:700 !important; font-size:0.95rem !important; margin:0 0 4px 0 !important; }
+  .cbrr-wrap .rasgo p{ margin:0; font-size:0.86rem; color:var(--ink-soft); }
+
+  .cbrr-wrap .cat-intro{ max-width:60ch; }
+  .cbrr-wrap .grid{ margin-top:26px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+
+  .cbrr-wrap .card{
     background:var(--paper-raised); border:1px solid var(--line);
     border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
-    transition: all 0.3s ease;
   }
-  .card:hover{ transform: translateY(-5px); box-shadow: 0 12px 28px rgba(27,46,48,0.12); }
-
-  .card-btn{ padding:20px 24px; gap:16px; }
-  .card-btn .ic{ width:48px; height:48px; border-radius:12px; }
-
-  .img-slot{
-    border:2px dashed var(--clay); border-radius:12px; padding:20px; margin:20px 0;
-    min-height:180px;
-    background:repeating-linear-gradient(45deg, rgba(184,69,31,0.06), rgba(184,69,31,0.06) 12px, transparent 12px, transparent 24px);
+  .cbrr-wrap .card-btn{
+    width:100%; text-align:left; background:none !important; border:none;
+    padding:16px 18px; cursor:pointer; display:flex; align-items:center; gap:12px;
+    font-family:inherit; color:inherit; margin:0;
   }
+  .cbrr-wrap .card-btn:focus-visible, .cbrr-wrap a:focus-visible{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+  .cbrr-wrap .card-btn .ic{
+    flex:0 0 auto; width:34px !important; height:34px !important; border-radius:9px;
+    background:var(--root) !important; color:var(--paper) !important;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cbrr-wrap .card-btn .ic svg{ width:18px !important; height:18px !important; }
+  .cbrr-wrap .card-btn .label{ flex:1; }
+  .cbrr-wrap .card-btn .name{
+    font-family:'Fraunces',Georgia,serif !important; font-weight:600 !important;
+    font-size:1.02rem !important; display:block;
+  }
+  .cbrr-wrap .card-btn .tag{ font-family:'Space Mono',monospace !important; font-size:0.7rem !important; color:var(--ink-soft) !important; }
+  .cbrr-wrap .card-btn .chev{
+    flex:0 0 auto; width:16px !important; height:16px !important;
+    transition:transform 0.25s ease; color:var(--ink-soft) !important;
+  }
+  .cbrr-wrap .card[data-open="true"] .chev{ transform:rotate(180deg); }
+
+  .cbrr-wrap .card-panel{ max-height:0; overflow:hidden; transition:max-height 0.32s ease; }
+  .cbrr-wrap .card[data-open="true"] .card-panel{ max-height:900px; }
+  .cbrr-wrap .card-panel-inner{ padding:0 18px 18px 18px; border-top:1px solid var(--line); padding-top:14px; }
+  .cbrr-wrap .card-panel-inner p{ margin:0 0 12px 0 !important; font-size:0.92rem; }
+  .cbrr-wrap .example{
+    background:rgba(51,89,74,0.07); border-left:3px solid var(--root);
+    border-radius:6px; padding:10px 14px; font-size:0.86rem; margin-bottom:12px;
+  }
+  .cbrr-wrap .question{ display:flex; gap:10px; align-items:flex-start; font-size:0.9rem; font-style:italic; color:var(--root-dark) !important; }
+  .cbrr-wrap .question svg{ flex:0 0 auto; width:18px !important; height:18px !important; margin-top:2px; }
+
+  .cbrr-wrap .progress-note{ font-family:'Space Mono',monospace !important; font-size:0.72rem !important; color:var(--ink-soft) !important; margin-top:16px; letter-spacing:0.04em; }
+
+  .cbrr-wrap .cierre h2{ font-size:1.4rem !important; }
+  .cbrr-wrap .cierre .synth{ max-width:60ch; font-size:1rem; }
+  .cbrr-wrap .cierre .synth em{ font-style:italic; color:var(--clay) !important; }
+
+  .cbrr-wrap footer{ padding:28px 0 48px 0; font-family:'Space Mono',monospace !important; font-size:0.72rem !important; color:var(--ink-soft) !important; }
+
+  .cbrr-wrap svg{ max-width:none !important; }
 </style>
 
 <div class="cbrr-wrap">
@@ -73,6 +247,7 @@
     <span class="kicker">Módulo 1 · Momento 3 — Interpretar · Bloque 3</span>
     <h1>Todos los días cuentas historias en el ciberespacio. Casi nunca te das cuenta.</h1>
     <p class="lede">Cada vez que ves un video, compartes un meme, juegas en un mundo virtual o escuchas un podcast, estás dentro de una narrativa digital. Aquí vas a descubrir qué las hace distintas de un cuento o una clase presencial — y qué formas pueden tomar.</p>
+
     <div class="system-slot">
       <b>Tarjeta del sistema:</b> Conexión — aparece aquí, invitando a relacionar esta pregunta con algo que el estudiante hizo hoy mismo en su celular.
     </div>
@@ -83,6 +258,7 @@
     <span class="eyebrow">Lo esencial</span>
     <h2>¿Qué hace que una narrativa sea "nueva"?</h2>
     <p class="cat-intro">No es solo que esté en una pantalla. Una narrativa digital cumple, en distinto grado, estos cinco rasgos:</p>
+
     <ul class="rasgos">
       <li class="rasgo">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
@@ -110,6 +286,7 @@
         <p>Se ramifica, se mezcla y se adapta a cada público, en lugar de seguir un único camino.</p>
       </li>
     </ul>
+
     <div class="system-slot">
       <b>Tarjeta del sistema:</b> Ten en cuenta — aparece aquí, señalando que estos cinco rasgos son los mismos que el estudiante identificará en cada categoría de la siguiente sección.
     </div>
@@ -120,9 +297,9 @@
     <span class="eyebrow">Explora</span>
     <h2>Ocho formas que puede tomar una narrativa digital</h2>
     <p class="cat-intro">No son cajas cerradas — una misma historia puede ser, a la vez, interactiva e inmersiva. Ábrelas en el orden que quieras.</p>
-    
+
     <div class="grid" id="cardGrid">
-      <!-- Todas tus 8 cards originales están aquí abajo (sin cambiar texto) -->
+
       <!-- 1 Multimedia -->
       <article class="card" data-open="false">
         <button class="card-btn" aria-expanded="false">
@@ -139,14 +316,162 @@
               <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Publicación Botamán jentchuayam"> -->
               <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: publicación "Botamán jentchuayam"</span>
             </div>
-            <p class="question">¿Qué perderías si esa misma información solo estuviera en un párrafo de texto?</p>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Qué perderías si esa misma información solo estuviera en un párrafo de texto?</p>
           </div>
         </div>
       </article>
 
-      <!-- 2 a 8 cards... (mantengo todas exactamente como las tenías) -->
+      <!-- 2 Dinámicas -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></span>
+          <span class="label"><span class="name">Dinámicas</span><span class="tag">#dinamicas</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Cambian de forma muy rápida y se actualizan con lo que está pasando en el momento; su vigencia dura poco, pero se difunden a gran velocidad.</p>
+            <div class="example">Ejemplo: un meme sobre un partido de la Selección Colombia o sobre el Transmilenio, que solo tiene sentido mientras esa situación sigue siendo tema de conversación.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: meme de Transmilenio / Selección Colombia -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Meme sobre la Selección Colombia"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: meme de la Selección / Transmilenio</span>
+            </div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Por qué un meme deja de tener gracia unas semanas después?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 Contextuales -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg></span>
+          <span class="label"><span class="name">Contextuales</span><span class="tag">#contextuales</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Solo se entienden del todo si conoces el lugar, la cultura o el momento histórico del que hablan.</p>
+            <div class="example">Ejemplo: el calendario azteca conocido como la Piedra del Sol necesita explicación cultural para leerse — sin ese contexto, es solo un disco tallado.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: la Piedra del Sol (calendario azteca) -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Piedra del Sol, calendario azteca"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: Piedra del Sol / calendario azteca</span>
+            </div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Qué contenido digital de tu región no se entendería fuera de Colombia?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 Interactivas -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3l14 8-6 1-1 6-7-15z"/></svg></span>
+          <span class="label"><span class="name">Interactivas</span><span class="tag">#interactivas</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Piden una acción de quien las usa: hacer clic, elegir una ruta, escribir una respuesta. La historia no avanza sola.</p>
+            <div class="example">Ejemplo: un mapa interactivo de los recursos naturales de Colombia, donde hay que pulsar cada zona para descubrir su información.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: mapa interactivo de Recursos Naturales de Colombia -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Mapa interactivo de recursos naturales"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: mapa interactivo de Recursos Naturales</span>
+            </div>
+            <div class="system-slot" style="margin:0 0 12px 0;"><b>Tarjeta del sistema:</b> Herramienta digital — aparece aquí, con el enlace real al mapa interactivo para que el estudiante lo abra y explore.</div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Explorarías un mapa así si nadie te dijera por dónde empezar?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5 Transmedia -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M6.6 7.2L11 16M17.4 7.2L13 16M7 6h10"/></svg></span>
+          <span class="label"><span class="name">Transmedia</span><span class="tag">#transmedia</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Una misma historia se reparte en varias plataformas, y cada una aporta una parte distinta — no la misma repetida.</p>
+            <div class="example">Ejemplo: una serie de videos cortos sobre "la evolución de Colombia" que continúa con hashtags y respuestas de otros usuarios en distintas redes.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: serie "The Evolution of Colombia" en TikTok -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Serie The Evolution of Colombia"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: "The Evolution of Colombia"</span>
+            </div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Qué historia has seguido tú a través de más de una red social?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6 Creativas -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg></span>
+          <span class="label"><span class="name">Creativas</span><span class="tag">#creativas</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Mezclan referencias que normalmente no van juntas, para producir algo original o inesperado.</p>
+            <div class="example">Ejemplo: un montaje que compara un personaje de anime con un traje típico colombiano, o un video de bordado tradicional editado con música y ritmo de red social.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: montaje comparativo o bordado editado -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Montaje creativo con referencias mezcladas"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: montaje / bordado editado</span>
+            </div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Qué dos cosas "que no van juntas" mezclarías tú en un video?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7 Colaborativas -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 20c0-3 2.5-5 5-5s5 2 5 5M11 20c0-3 2.5-5 5-5s5 2 5 5"/></svg></span>
+          <span class="label"><span class="name">Colaborativas</span><span class="tag">#colaborativas</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>No las termina una sola persona: se construyen entre quien las crea y quien las ve, comenta o continúa.</p>
+            <div class="example">Ejemplo: un video donde una creadora graba en vivo con la participación directa de otra persona, y el resultado depende de esa interacción.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: video colaborativo en vivo -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Video colaborativo en vivo"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: video colaborativo en vivo</span>
+            </div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿Alguna vez tu comentario cambió el rumbo de un contenido que viste?</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8 Inmersiva -->
+      <article class="card" data-open="false">
+        <button class="card-btn" aria-expanded="false">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+          <span class="label"><span class="name">Inmersiva</span><span class="tag">#inmersiva</span></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="card-panel">
+          <div class="card-panel-inner">
+            <p>Busca que sientas que estás <em>dentro</em> del espacio, no solo mirándolo desde afuera.</p>
+            <div class="example">Ejemplo: un recorrido virtual como el de la exposición "Hijas del Agua" en el Museo Nacional, que deja caminar por las salas igual que si estuvieras ahí.</div>
+            <!-- 📷 ESPACIO PARA IMAGEN: recorrido virtual "Hijas del Agua" -->
+            <div class="img-slot">
+              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Recorrido virtual Hijas del Agua"> -->
+              <span class="img-slot-hint">📷 Espacio para imagen<br>Captura: recorrido virtual "Hijas del Agua"</span>
+            </div>
+            <div class="system-slot" style="margin:0 0 12px 0;"><b>Tarjeta del sistema:</b> Herramienta digital — aparece aquí, con el enlace real al recorrido virtual para que el estudiante lo pruebe.</div>
+            <p class="question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.7-2 2-2 3.5M12 17h.01"/></svg>¿En qué se parece y en qué se diferencia de visitar el lugar en persona?</p>
+          </div>
+        </div>
+      </article>
 
     </div>
+
     <p class="progress-note" id="cbrrProgressNote">0 de 8 categorías exploradas</p>
   </section>
 
@@ -155,8 +480,9 @@
     <span class="eyebrow">Antes de seguir</span>
     <h2>Todo esto ya lo vives — ahora tiene nombre</h2>
     <p class="synth">En el ciberespacio, contar una historia ya no significa escribirla de principio a fin. Significa <em>editar, mezclar y ritmar</em> fragmentos que otros van a completar, comentar o transformar. Eso es lo que hace nuevas a estas narrativas: no reemplazan al libro o al relato oral, los multiplican en formas que cambian constantemente.</p>
+
     <div class="system-slot">
-      <b>Tarjeta del sistema:</b> Producto esperado — aparece aquí, indicando al estudiante qué debe llevar al Mini Reto del siguiente bloque.
+      <b>Tarjeta del sistema:</b> Producto esperado — aparece aquí, indicando al estudiante qué debe llevar (por ejemplo, la categoría que más le interesó) al Mini Reto del siguiente bloque.
     </div>
   </section>
 
@@ -168,10 +494,14 @@
 
 <script>
 (function(){
-  var root = document.querySelector('.cbrr-wrap');
+  var root = document.currentScript.previousElementSibling;
+  if(!root || !root.classList || !root.classList.contains('cbrr-wrap')){
+    root = document.querySelector('.cbrr-wrap');
+  }
   var cards = root.querySelectorAll('.card');
   var progressNote = root.querySelector('#cbrrProgressNote');
   var opened = new Set();
+
   cards.forEach(function(card, i){
     var btn = card.querySelector('.card-btn');
     btn.addEventListener('click', function(){
