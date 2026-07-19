@@ -1,450 +1,221 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CIBERRAÍCES · Módulo 1 · Momento 3 — Bloque 3</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIBERRAÍCES · Módulo 1 · Momento 3 — Bloque 3</title>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&amp;family=Sora:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+  
+  <style>
+    .cbrr-wrap, .cbrr-wrap * { box-sizing: border-box; }
+    
+    .cbrr-wrap {
+      --ink: #1B2E30;
+      --ink-soft: #4B5E5A;
+      --paper: #F7F1E4;
+      --paper-raised: #FFFDF7;
+      --root: #33594A;
+      --root-dark: #233F35;
+      --clay: #B8451F;
+      --gold: #D9A62B;
+      --line: rgba(27,46,48,0.14);
+      --shadow: 0 4px 16px rgba(27,46,48,0.09);
+      --radius: 16px;
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Sora:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Sora', system-ui, sans-serif;
+      line-height: 1.62;
+      min-height: 100vh;
+    }
 
-<style>
-  .cbrr-wrap, .cbrr-wrap *{ box-sizing:border-box; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; }
 
-  .cbrr-wrap{
-    --ink:#1B2E30;
-    --ink-soft:#4B5E5A;
-    --paper:#F7F1E4;
-    --paper-raised:#FFFDF7;
-    --root:#33594A;
-    --root-dark:#233F35;
-    --clay:#B8451F;
-    --gold:#D9A62B;
-    --line:rgba(27,46,48,0.14);
-    --shadow: 0 4px 16px rgba(27,46,48,0.09);
-    --radius: 16px;
+    .hero h1 {
+      font-size: clamp(2.1rem, 5.5vw, 2.95rem);
+      font-style: normal !important; /* Sin cursiva */
+      font-weight: 600;
+    }
 
-    background:var(--paper) !important;
-    color:var(--ink) !important;
-    font-family:'Sora',system-ui,sans-serif !important;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
-    display:block;
-    padding:0; margin:0;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .cbrr-wrap *{ transition-duration:0.001ms !important; }
-  }
+    .card {
+      background: var(--paper-raised);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(27,46,48,0.13); }
 
-  .cbrr-wrap a{ color:var(--root-dark) !important; }
+    .card-btn {
+      width: 100%; text-align: left; background: none; border: none;
+      padding: 22px 26px; cursor: pointer; display: flex; align-items: center; gap: 18px;
+    }
 
-  .cbrr-wrap h1, .cbrr-wrap h2, .cbrr-wrap h3, .cbrr-wrap h4{
-    font-family:'Fraunces',Georgia,serif !important;
-    font-weight:600 !important;
-    font-style:normal !important;
-    margin:0 0 0.5rem 0 !important;
-    color:var(--ink) !important;
-    line-height:1.25 !important;
-  }
+    .card-btn .ic {
+      flex: 0 0 52px; height: 52px; background: var(--root); color: white;
+      border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    }
 
-  .cbrr-wrap .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; position:relative; }
+    .img-slot {
+      border: 2px dashed var(--clay);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: repeating-linear-gradient(45deg, rgba(184,69,31,0.06), rgba(184,69,31,0.06) 14px, transparent 14px, transparent 28px);
+    }
 
-  .cbrr-wrap .eyebrow{
-    font-family:'Space Mono',monospace !important;
-    font-size:0.76rem !important;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--root-dark) !important;
-    display:inline-block;
-    margin-bottom:0.6rem;
-  }
-
-  /* ---------- hero ---------- */
-  .cbrr-wrap .hero{ padding:56px 0 32px 0; }
-  .cbrr-wrap .hero h1{
-    font-size:clamp(2rem, 5vw, 2.8rem) !important;
-    margin-top:0.6rem !important;
-    max-width:20ch;
-  }
-  .cbrr-wrap .hero .lede{
-    color:var(--ink-soft) !important;
-    font-size:1.05rem;
-    max-width:56ch;
-    margin-top:1rem;
-  }
-
-  /* ---------- system + image slots ---------- */
-  .cbrr-wrap .system-slot{
-    border:1.5px dashed var(--ink-soft);
-    border-radius:10px;
-    padding:14px 18px;
-    margin:24px 0;
-    font-family:'Space Mono',monospace !important;
-    font-size:0.78rem !important;
-    color:var(--ink-soft) !important;
-    background:rgba(255,253,247,0.5);
-  }
-  .cbrr-wrap .system-slot b{
-    color:var(--ink) !important; font-family:'Sora',sans-serif !important; font-size:0.85rem !important;
-  }
-  .cbrr-wrap .img-slot{
-    border:2px dashed var(--clay);
-    border-radius:12px;
-    padding:24px;
-    margin:16px 0;
-    min-height:140px;
-    display:flex; align-items:center; justify-content:center;
-    text-align:center;
-    background:repeating-linear-gradient(45deg, rgba(184,69,31,0.06), rgba(184,69,31,0.06) 14px, transparent 14px, transparent 28px);
-  }
-  .cbrr-wrap .img-slot img{
-    display:block; width:100% !important; height:auto !important; border-radius:8px;
-  }
-  .cbrr-wrap .img-slot .hint{
-    font-family:'Space Mono',monospace !important;
-    font-size:0.74rem !important;
-    color:var(--clay) !important;
-  }
-
-  /* ---------- sections ---------- */
-  .cbrr-wrap section{ padding:36px 0; }
-  .cbrr-wrap section + section{ border-top:1px solid var(--line); }
-  .cbrr-wrap .cat-intro{ max-width:60ch; color:var(--ink-soft); }
-
-  /* ---------- 5 rasgos ---------- */
-  .cbrr-wrap .rasgos{
-    list-style:none; margin:22px 0 0 0; padding:0;
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;
-  }
-  .cbrr-wrap .rasgo{
-    background:var(--paper-raised); border:1px solid var(--line);
-    border-radius:var(--radius); padding:16px 18px; box-shadow:0 1px 0 rgba(27,46,48,0.06);
-  }
-  .cbrr-wrap .rasgo .ic{ font-size:1.4rem !important; margin-bottom:8px; display:block; }
-  .cbrr-wrap .rasgo h4{ font-family:'Sora',sans-serif !important; font-weight:700 !important; font-size:0.94rem !important; }
-  .cbrr-wrap .rasgo p{ margin:0; font-size:0.85rem; color:var(--ink-soft); }
-
-  /* ---------- category cards ---------- */
-  .cbrr-wrap .grid{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px; margin-top:28px;
-  }
-  .cbrr-wrap .card{
-    background:var(--paper-raised) !important;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    transition:transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .cbrr-wrap .card:hover{ transform:translateY(-6px); box-shadow:0 16px 32px rgba(27,46,48,0.13); }
-
-  .cbrr-wrap .card-btn{
-    width:100%; text-align:left; background:none !important; border:none;
-    padding:20px 24px; cursor:pointer; display:flex; align-items:center; gap:16px;
-    font-family:inherit; color:inherit;
-  }
-  .cbrr-wrap .card-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
-
-  .cbrr-wrap .card-btn .ic{
-    flex:0 0 52px; width:52px !important; height:52px !important;
-    background:var(--root) !important; color:#fff !important;
-    border-radius:14px; display:flex; align-items:center; justify-content:center;
-    font-size:1.5rem !important; line-height:1 !important;
-  }
-  .cbrr-wrap .card-btn .label{ flex:1; }
-  .cbrr-wrap .card-btn .name{
-    font-family:'Fraunces',Georgia,serif !important; font-weight:600 !important;
-    font-size:1.15rem !important; display:block;
-  }
-  .cbrr-wrap .card-btn .tag{
-    font-family:'Space Mono',monospace !important; font-size:0.72rem !important; color:var(--ink-soft) !important;
-  }
-  .cbrr-wrap .card-btn .chev{
-    flex:0 0 auto; font-size:1rem; color:var(--ink-soft) !important;
-    transition:transform 0.25s ease;
-  }
-  .cbrr-wrap .card[data-open="true"] .chev{ transform:rotate(180deg); }
-
-  .cbrr-wrap .card-panel{ max-height:0; overflow:hidden; transition:max-height 0.45s ease; }
-  .cbrr-wrap .card[data-open="true"] .card-panel{ max-height:1400px; }
-  .cbrr-wrap .card-panel-inner{ padding:0 24px 22px 24px; border-top:1px solid var(--line); padding-top:16px; }
-  .cbrr-wrap .card-panel-inner p{ margin:0 0 12px 0 !important; font-size:0.94rem; }
-  .cbrr-wrap .example{
-    background:rgba(51,89,74,0.07); border-left:3px solid var(--root);
-    border-radius:6px; padding:10px 14px; font-size:0.87rem; margin-bottom:12px;
-  }
-  .cbrr-wrap .question{
-    display:flex; gap:10px; font-size:0.9rem; font-style:italic; color:var(--root-dark) !important;
-  }
-  .cbrr-wrap .question .qic{ flex:0 0 auto; }
-
-  .cbrr-wrap .progress-note{
-    font-family:'Space Mono',monospace !important; font-size:0.74rem !important;
-    color:var(--ink-soft) !important; margin-top:18px; letter-spacing:0.04em;
-  }
-
-  /* ---------- cierre ---------- */
-  .cbrr-wrap .cierre h2{ font-size:1.5rem !important; }
-  .cbrr-wrap .cierre .synth{ max-width:60ch; font-size:1rem; }
-  .cbrr-wrap .cierre .synth em{ font-style:italic; color:var(--clay) !important; }
-
-  .cbrr-wrap footer{
-    padding:28px 0 48px 0; font-family:'Space Mono',monospace !important;
-    font-size:0.72rem !important; color:var(--ink-soft) !important;
-  }
-</style>
+    .card-panel { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+    .card[data-open="true"] .card-panel { max-height: 1400px; }
+  </style>
 </head>
 <body>
-<div class="cbrr-wrap">
-<div class="wrap">
+  <div class="cbrr-wrap">
+    <div class="wrap">
 
-  <!-- ================= APERTURA ================= -->
-  <header class="hero">
-    <span class="eyebrow">Módulo 1 · Momento 3 — Interpretar · Bloque 3</span>
-    <h1>Todos los días cuentas historias en el ciberespacio. Casi nunca te das cuenta.</h1>
-    <p class="lede">Cada vez que ves un video, compartes un meme, juegas en un mundo virtual o escuchas un podcast, estás dentro de una narrativa digital. Aquí vas a descubrir qué las hace distintas de un cuento o una clase presencial — y qué formas pueden tomar.</p>
+      <!-- HERO -->
+      <header class="hero">
+        <span class="eyebrow" style="font-family:'Space Mono',monospace; font-size:0.76rem; text-transform:uppercase; color:#233F35;">Módulo 1 · Momento 3 — Interpretar · Bloque 3</span>
+        <h1>Todos los días cuentas historias en el ciberespacio. Casi nunca te das cuenta.</h1>
+        <p style="color:#4B5E5A; font-size:1.08rem;">Cada vez que ves un video, compartes un meme, juegas en un mundo virtual o escuchas un podcast, estás dentro de una narrativa digital.</p>
+      </header>
 
-    <div class="system-slot">
-      <b>Tarjeta del sistema:</b> Conexión — aparece aquí, invitando a relacionar esta pregunta con algo que el estudiante hizo hoy mismo en su celular.
+      <!-- CATEGORÍAS - 8 CARDS -->
+      <section id="categorias" style="margin-top:40px;">
+        <h2 style="font-family:'Fraunces',serif; font-size:2.2rem;">Ocho formas que puede tomar una narrativa digital</h2>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-top:30px;">
+
+          <!-- 1 Multimedia -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">🎬</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Multimedia</span><br><small style="color:#4B5E5A;">#multimedia</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Combina varios formatos —texto, audio, imagen y video— en un mismo recurso.</p>
+                <div class="img-slot">📷 Espacio para tu imagen (Botamán jentchuayam)</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2 Dinámicas -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">⚡</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Dinámicas</span><br><small style="color:#4B5E5A;">#dinamicas</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Cambian rápidamente y se difunden a gran velocidad.</p>
+                <div class="img-slot">📷 Espacio para tu meme</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3 Contextuales -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">🌍</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Contextuales</span><br><small style="color:#4B5E5A;">#contextuales</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Solo se entienden con el contexto cultural o histórico.</p>
+                <div class="img-slot">📷 Piedra del Sol</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4 Interactivas -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">🖱️</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Interactivas</span><br><small style="color:#4B5E5A;">#interactivas</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Requieren acción del usuario para avanzar.</p>
+                <div class="img-slot">📷 Mapa interactivo</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5 Transmedia -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">🔀</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Transmedia</span><br><small style="color:#4B5E5A;">#transmedia</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>La historia se cuenta a través de varias plataformas.</p>
+                <div class="img-slot">📷 Serie transmedia</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6 Creativas -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">✨</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Creativas</span><br><small style="color:#4B5E5A;">#creativas</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Mezclan referencias inesperadas.</p>
+                <div class="img-slot">📷 Montaje creativo</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7 Colaborativas -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">👥</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Colaborativas</span><br><small style="color:#4B5E5A;">#colaborativas</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Se construyen entre varios participantes.</p>
+                <div class="img-slot">📷 Video colaborativo</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8 Inmersiva -->
+          <article class="card" data-open="false">
+            <button class="card-btn">
+              <span class="ic">🌌</span>
+              <span><span style="font-size:1.2rem; font-weight:600;">Inmersiva</span><br><small style="color:#4B5E5A;">#inmersiva</small></span>
+            </button>
+            <div class="card-panel">
+              <div style="padding:20px 26px;">
+                <p>Hace sentir al usuario dentro del espacio.</p>
+                <div class="img-slot">📷 Recorrido virtual</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
     </div>
-  </header>
+  </div>
 
-  <!-- ================= NÚCLEO CONCEPTUAL ================= -->
-  <section id="nucleo">
-    <span class="eyebrow">Lo esencial</span>
-    <h2>¿Qué hace que una narrativa sea "nueva"?</h2>
-    <p class="cat-intro">No es solo que esté en una pantalla. Una narrativa digital cumple, en distinto grado, estos cinco rasgos:</p>
-
-    <ul class="rasgos">
-      <li class="rasgo"><span class="ic">🧩</span><h4>Integra varios lenguajes</h4><p>Texto, imagen, audio, video, hipervínculos y juegos conviven en un mismo relato.</p></li>
-      <li class="rasgo"><span class="ic">🖱️</span><h4>Es interactiva</h4><p>Quien la consume puede decidir, responder o modificar lo que ocurre.</p></li>
-      <li class="rasgo"><span class="ic">🌌</span><h4>Es inmersiva</h4><p>Usa video 360°, realidad aumentada o entornos multimedia para "meter" al usuario dentro.</p></li>
-      <li class="rasgo"><span class="ic">👥</span><h4>Es colaborativa</h4><p>Una comunidad la opina, la edita o la expande — no tiene un único autor.</p></li>
-      <li class="rasgo"><span class="ic">🌱</span><h4>No es lineal</h4><p>Se ramifica, se mezcla y se adapta a cada público, en lugar de seguir un único camino.</p></li>
-    </ul>
-
-    <div class="system-slot">
-      <b>Tarjeta del sistema:</b> Ten en cuenta — aparece aquí, señalando que estos cinco rasgos son los mismos que el estudiante identificará en cada categoría de la siguiente sección.
-    </div>
-  </section>
-
-  <!-- ================= CATEGORÍAS ================= -->
-  <section id="categorias">
-    <span class="eyebrow">Explora</span>
-    <h2>Ocho formas que puede tomar una narrativa digital</h2>
-    <p class="cat-intro">No son cajas cerradas — una misma historia puede ser, a la vez, interactiva e inmersiva. Ábrelas en el orden que quieras.</p>
-
-    <div class="grid" id="cardGrid">
-
-      <!-- 1 Multimedia -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">🎬</span>
-          <span class="label"><span class="name">Multimedia</span><span class="tag">#multimedia</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Combina varios formatos —texto, audio, imagen y video— en un mismo recurso, en lugar de contar la historia con uno solo.</p>
-            <div class="example">Ejemplo: una publicación sobre el saludo <em>Botamán jentchuayam</em> del pueblo Kamëntsá mezcla texto explicativo, imagen y un audio en lengua originaria para enseñar la tradición.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: captura de la publicación "Botamán jentchuayam" -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Publicación Botamán jentchuayam"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: publicación "Botamán jentchuayam"</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Qué perderías si esa misma información solo estuviera en un párrafo de texto?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 2 Dinámicas -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">⚡</span>
-          <span class="label"><span class="name">Dinámicas</span><span class="tag">#dinamicas</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Cambian de forma muy rápida y se actualizan con lo que está pasando en el momento; su vigencia dura poco, pero se difunden a gran velocidad.</p>
-            <div class="example">Ejemplo: un meme sobre un partido de la Selección Colombia o sobre el Transmilenio, que solo tiene sentido mientras esa situación sigue siendo tema de conversación.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: meme de Transmilenio / Selección Colombia -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Meme sobre la Selección Colombia"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: meme de la Selección / Transmilenio</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Por qué un meme deja de tener gracia unas semanas después?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 3 Contextuales -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">🌍</span>
-          <span class="label"><span class="name">Contextuales</span><span class="tag">#contextuales</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Solo se entienden del todo si conoces el lugar, la cultura o el momento histórico del que hablan.</p>
-            <div class="example">Ejemplo: el calendario azteca conocido como la Piedra del Sol necesita explicación cultural para leerse — sin ese contexto, es solo un disco tallado.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: la Piedra del Sol (calendario azteca) -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Piedra del Sol, calendario azteca"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: Piedra del Sol / calendario azteca</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Qué contenido digital de tu región no se entendería fuera de Colombia?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 4 Interactivas -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">🖱️</span>
-          <span class="label"><span class="name">Interactivas</span><span class="tag">#interactivas</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Piden una acción de quien las usa: hacer clic, elegir una ruta, escribir una respuesta. La historia no avanza sola.</p>
-            <div class="example">Ejemplo: un mapa interactivo de los recursos naturales de Colombia, donde hay que pulsar cada zona para descubrir su información.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: mapa interactivo de Recursos Naturales de Colombia -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Mapa interactivo de recursos naturales"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: mapa interactivo de Recursos Naturales</span>
-            </div>
-            <div class="system-slot" style="margin:0 0 12px 0;"><b>Tarjeta del sistema:</b> Herramienta digital — aparece aquí, con el enlace real al mapa interactivo para que el estudiante lo abra y explore.</div>
-            <p class="question"><span class="qic">❓</span>¿Explorarías un mapa así si nadie te dijera por dónde empezar?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 5 Transmedia -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">🔀</span>
-          <span class="label"><span class="name">Transmedia</span><span class="tag">#transmedia</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Una misma historia se reparte en varias plataformas, y cada una aporta una parte distinta — no la misma repetida.</p>
-            <div class="example">Ejemplo: una serie de videos cortos sobre "la evolución de Colombia" que continúa con hashtags y respuestas de otros usuarios en distintas redes.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: serie "The Evolution of Colombia" en TikTok -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Serie The Evolution of Colombia"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: "The Evolution of Colombia"</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Qué historia has seguido tú a través de más de una red social?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 6 Creativas -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">✨</span>
-          <span class="label"><span class="name">Creativas</span><span class="tag">#creativas</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Mezclan referencias que normalmente no van juntas, para producir algo original o inesperado.</p>
-            <div class="example">Ejemplo: un montaje que compara un personaje de anime con un traje típico colombiano, o un video de bordado tradicional editado con música y ritmo de red social.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: montaje comparativo o bordado editado -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Montaje creativo con referencias mezcladas"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: montaje / bordado editado</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Qué dos cosas "que no van juntas" mezclarías tú en un video?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 7 Colaborativas -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">👥</span>
-          <span class="label"><span class="name">Colaborativas</span><span class="tag">#colaborativas</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>No las termina una sola persona: se construyen entre quien las crea y quien las ve, comenta o continúa.</p>
-            <div class="example">Ejemplo: un video donde una creadora graba en vivo con la participación directa de otra persona, y el resultado depende de esa interacción.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: video colaborativo en vivo -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Video colaborativo en vivo"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: video colaborativo en vivo</span>
-            </div>
-            <p class="question"><span class="qic">❓</span>¿Alguna vez tu comentario cambió el rumbo de un contenido que viste?</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 8 Inmersiva -->
-      <article class="card" data-open="false">
-        <button class="card-btn" aria-expanded="false">
-          <span class="ic">🌌</span>
-          <span class="label"><span class="name">Inmersiva</span><span class="tag">#inmersiva</span></span>
-          <span class="chev">▾</span>
-        </button>
-        <div class="card-panel">
-          <div class="card-panel-inner">
-            <p>Busca que sientas que estás <em>dentro</em> del espacio, no solo mirándolo desde afuera.</p>
-            <div class="example">Ejemplo: un recorrido virtual como el de la exposición "Hijas del Agua" en el Museo Nacional, que deja caminar por las salas igual que si estuvieras ahí.</div>
-            <!-- 📷 ESPACIO PARA IMAGEN: recorrido virtual "Hijas del Agua" -->
-            <div class="img-slot">
-              <!-- 👉 Reemplaza esta línea con: <img src="tu-imagen.jpg" alt="Recorrido virtual Hijas del Agua"> -->
-              <span class="hint">📷 Espacio para imagen<br>Captura: recorrido virtual "Hijas del Agua"</span>
-            </div>
-            <div class="system-slot" style="margin:0 0 12px 0;"><b>Tarjeta del sistema:</b> Herramienta digital — aparece aquí, con el enlace real al recorrido virtual para que el estudiante lo pruebe.</div>
-            <p class="question"><span class="qic">❓</span>¿En qué se parece y en qué se diferencia de visitar el lugar en persona?</p>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-    <p class="progress-note" id="cbrrProgressNote">0 de 8 categorías exploradas</p>
-  </section>
-
-  <!-- ================= CIERRE ================= -->
-  <section class="cierre">
-    <span class="eyebrow">Antes de seguir</span>
-    <h2>Todo esto ya lo vives — ahora tiene nombre</h2>
-    <p class="synth">En el ciberespacio, contar una historia ya no significa escribirla de principio a fin. Significa <em>editar, mezclar y ritmar</em> fragmentos que otros van a completar, comentar o transformar. Eso es lo que hace nuevas a estas narrativas: no reemplazan al libro o al relato oral, los multiplican en formas que cambian constantemente.</p>
-
-    <div class="system-slot">
-      <b>Tarjeta del sistema:</b> Producto esperado — aparece aquí, indicando al estudiante qué debe llevar (por ejemplo, la categoría que más le interesó) al Mini Reto del siguiente bloque.
-    </div>
-  </section>
-
-  <footer>CIBERRAÍCES · Módulo 1 · Momento 3 — Interpretar · Bloque 3 de 3</footer>
-
-</div>
-</div>
-
-<script>
-(function(){
-  var cards = document.querySelectorAll('.cbrr-wrap .card');
-  var progressNote = document.getElementById('cbrrProgressNote');
-  var opened = new Set();
-
-  cards.forEach(function(card, i){
-    var btn = card.querySelector('.card-btn');
-    btn.addEventListener('click', function(){
-      var isOpen = card.getAttribute('data-open') === 'true';
-      card.setAttribute('data-open', String(!isOpen));
-      btn.setAttribute('aria-expanded', String(!isOpen));
-      if(!isOpen){ opened.add(i); } else { opened.delete(i); }
-      if(progressNote){ progressNote.textContent = opened.size + ' de 8 categorías exploradas'; }
+  <script>
+    document.querySelectorAll('.card').forEach(card => {
+      card.querySelector('.card-btn').addEventListener('click', () => {
+        const isOpen = card.getAttribute('data-open') === 'true';
+        card.setAttribute('data-open', !isOpen);
+      });
     });
-  });
-})();
-</script>
+  </script>
 </body>
 </html>
