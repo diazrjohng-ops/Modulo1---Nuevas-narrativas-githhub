@@ -72,6 +72,15 @@
 
     .card-panel { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
     .card[data-open="true"] .card-panel { max-height: 1400px; }
+    
+        /* ======================== OCULTAR BARRA DE DESPLAZAMIENTO ======================== */
+    .cbrr-wrap,
+    .cbrr-wrap body,
+    html {
+        overflow-y: hidden !important;
+        height: 100% !important;
+    }
+    /* ================================================================================ */
   </style>
 </head>
 <body>
